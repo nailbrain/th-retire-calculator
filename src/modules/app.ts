@@ -143,7 +143,8 @@ function update() {
     const housingCost = Math.round(baseHousing * housingMultiplier)
     // Utilities scale by housing preference (provided in THB). Convert to GBP if needed for internal math.
     const utilitiesTHB = utilitiesByHousingTHB[housing]
-    const utilitiesCost = currency === 'GBP' ? Math.round(utilitiesTHB / gbpToThbRate) : utilitiesTHB
+    // Keep internal calculations in GBP; display conversion happens in formatCurrency.
+    const utilitiesCost = Math.round(utilitiesTHB / gbpToThbRate)
     const transportCost = transportCosts[transport].monthly
     const selectedLifestyle = lifestyleCosts[currentLifestyle]
     const thaiFoodMid = Math.round((selectedLifestyle.thai.food[0] + selectedLifestyle.thai.food[1]) / 2)
