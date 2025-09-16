@@ -89,6 +89,8 @@ export function initApp() {
       const amount = parseInt(this.getAttribute('data-amount') || '0', 10)
       const input = document.getElementById('currentBudget') as HTMLInputElement
       input.value = String(amount)
+      document.querySelectorAll('#budgetQuick button').forEach((b) => b.classList.remove('active'))
+      this.classList.add('active')
       update()
     })
   })
@@ -96,7 +98,7 @@ export function initApp() {
   document.querySelectorAll<HTMLButtonElement>('#flightChips .toggle-item').forEach((item) => {
     item.addEventListener('click', function () {
       document.querySelectorAll('#flightChips .toggle-item').forEach((t) => t.classList.remove('active', 'border-white'))
-      this.classList.add('active', 'border-white')
+      this.classList.add('active')
       flightsPerYear = parseInt(this.dataset.flights || '0', 10)
       update()
     })

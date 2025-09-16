@@ -22,6 +22,9 @@
   .chip.active {
     @apply bg-white border-emerald-500 text-emerald-700 ring-1 ring-emerald-200;
   }
+  #budgetQuick .chip.active {
+    @apply border-emerald-500 text-emerald-700 ring-1 ring-emerald-200;
+  }
   .section-title {
     @apply text-2xl font-semibold text-center tracking-tight;
   }
