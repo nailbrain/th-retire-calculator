@@ -89,13 +89,12 @@ export function updateAgeProjectionChart(format?: (n: number) => string) {
   })
 }
 
-export function updateBudgetPieChart(totalCost: number, housing: number, lifestyle: number, health: number, transport: number, format: (n: number) => string) {
+export function updateBudgetPieChart(totalCost: number, housing: number, lifestyle: number, health: number, transport: number, utilities: number, format: (n: number) => string) {
   const el = document.getElementById('budgetPieChart') as HTMLCanvasElement | null
   if (!el) return
   const ctx = el.getContext('2d')!
   if (charts.budgetPie) charts.budgetPie.destroy()
 
-  const utilities = 65
   const misc = Math.max(0, totalCost - housing - lifestyle - health - transport - utilities)
 
   charts.budgetPie = new Chart(ctx, {

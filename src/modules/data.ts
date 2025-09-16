@@ -66,4 +66,10 @@ export const cityMultipliers = {
 
 export type CityKey = keyof typeof cityMultipliers
 
+export const utilitiesByHousingTHB = {
+  budget: 1500,
+  comfortable: 3500,
+  premium: 5000,
+} as const
+
 

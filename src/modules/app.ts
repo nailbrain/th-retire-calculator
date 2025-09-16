@@ -1,4 +1,4 @@
-import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE } from './data'
+import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesByHousingTHB } from './data'
 import type { AgeKey, HousingKey, TransportKey, CurrencyCode, CityKey } from './data'
 import { updateCharts, updateAgeProjectionChart, updateBudgetPieChart } from './charts'
 
@@ -141,13 +141,15 @@ function update() {
     const baseHousing = housingCosts[housing].thai
     const housingMultiplier = cityMultipliers[city].housing
     const housingCost = Math.round(baseHousing * housingMultiplier)
+    // Utilities scale by housing preference (provided in THB). Convert to GBP if needed for internal math.
+    const utilitiesTHB = utilitiesByHousingTHB[housing]
+    const utilitiesCost = currency === 'GBP' ? Math.round(utilitiesTHB / gbpToThbRate) : utilitiesTHB
     const transportCost = transportCosts[transport].monthly
     const selectedLifestyle = lifestyleCosts[currentLifestyle]
     const thaiFoodMid = Math.round((selectedLifestyle.thai.food[0] + selectedLifestyle.thai.food[1]) / 2)
     const thaiEntMid = Math.round((selectedLifestyle.thai.entertainment[0] + selectedLifestyle.thai.entertainment[1]) / 2)
     const lifestyleCost = thaiFoodMid + thaiEntMid
     const healthCost = healthInsurance[age].good
-    const utilitiesCost = 65
     const miscCost = 100
 
     const monthlyFlightAllocation = Math.round((FLIGHT_RETURN_COST_GBP * flightsPerYear) / 12)
@@ -230,7 +232,7 @@ function update() {
     updateKeyRisks(age, currentLifestyle, monthlySavings)
     updateCharts(currentBudget, totalThailandCost, (n) => formatCurrency(n))
     updateAgeProjectionChart((n) => formatCurrency(n))
-    updateBudgetPieChart(totalThailandCost, housingCost, lifestyleCost, healthCost, transportCost, (n) => formatCurrency(n))
+    updateBudgetPieChart(totalThailandCost, housingCost, lifestyleCost, healthCost, transportCost, utilitiesCost, (n) => formatCurrency(n))
 
     setText('summaryMonthlySavings', formatCurrency(monthlySavings))
     setText('summaryTwentyYear', formatCurrency(ageAdjustedTwentyYear))
