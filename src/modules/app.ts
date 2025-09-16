@@ -78,7 +78,7 @@ export function initApp() {
   document.querySelectorAll<HTMLButtonElement>('#lifestyleToggles .toggle-item').forEach((item) => {
     item.addEventListener('click', function () {
       document.querySelectorAll('#lifestyleToggles .toggle-item').forEach((t) => t.classList.remove('active', 'border-white'))
-      this.classList.add('active', 'border-white')
+      this.classList.add('active')
       currentLifestyle = this.dataset.lifestyle as keyof typeof lifestyleCosts
       update()
     })
@@ -116,7 +116,7 @@ export function initApp() {
   document.querySelectorAll<HTMLButtonElement>('#cityChips .toggle-item').forEach((btn) => {
     btn.addEventListener('click', function () {
       document.querySelectorAll('#cityChips .toggle-item').forEach((t) => t.classList.remove('active', 'border-white'))
-      this.classList.add('active', 'border-white')
+      this.classList.add('active')
       city = (this.getAttribute('data-city') as CityKey) || 'cm'
       update()
     })
