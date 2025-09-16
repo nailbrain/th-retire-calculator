@@ -25,4 +25,9 @@
   .section-title {
     @apply text-2xl font-semibold text-center tracking-tight;
   }
+  /* Ensure long currency strings wrap on small screens */
+  .currency-wrap {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
 }

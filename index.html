@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="app" class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 p-6 font-sans text-slate-800 antialiased">
+    <div id="app" class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 p-6 font-sans text-slate-800 antialiased overflow-x-hidden">
       <div class="max-w-7xl mx-auto glass rounded-3xl overflow-hidden">
         <div class="relative text-white px-8 py-12 bg-gradient-to-r from-rose-500 via-orange-400 to-amber-400 text-center">
           <h1 class="text-4xl font-extrabold tracking-tight drop-shadow">🇹🇭 Thailand vs UK Retirement Calculator 🇬🇧</h1>
@@ -104,16 +104,16 @@
               </div>
               <h3 class="text-xl font-semibold text-center">Your Potential Savings</h3>
               <div class="text-center mt-4">
-                <div id="monthlySavings" class="text-5xl font-extrabold text-emerald-700">£1,200</div>
+                <div id="monthlySavings" class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-emerald-700 leading-tight break-words">£1,200</div>
                 <div class="opacity-90">per month</div>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
                 <div class="glass-chip rounded-xl p-4 text-center">
-                  <span id="yearlySavings" class="text-2xl font-bold block">£14,400</span>
+                  <span id="yearlySavings" class="block font-bold text-xl sm:text-2xl break-words">£14,400</span>
                   <div class="text-sm">Per Year</div>
                 </div>
                 <div class="glass-chip rounded-xl p-4 text-center">
-                  <span id="twentyYearSavings" class="text-2xl font-bold block">£288,000</span>
+                  <span id="twentyYearSavings" class="block font-bold text-xl sm:text-2xl break-words">£288,000</span>
                   <div class="text-sm">Over 20 Years</div>
                 </div>
               </div>
