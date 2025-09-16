@@ -20,7 +20,7 @@
     @apply bg-white/70 hover:bg-white rounded-xl px-2 py-2 border-2 border-transparent transition shadow-sm text-slate-800 min-w-0 text-center break-words leading-snug;
   }
   .chip.active {
-    @apply bg-white border-emerald-500 text-emerald-700;
+    @apply bg-white border-emerald-500 text-emerald-700 ring-1 ring-emerald-200;
   }
   .section-title {
     @apply text-2xl font-semibold text-center tracking-tight;
