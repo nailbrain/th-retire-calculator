@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thailand vs UK Retirement Calculator</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app" class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-fuchsia-500 p-6 font-sans text-slate-800 antialiased">
+      <div class="max-w-7xl mx-auto glass rounded-3xl overflow-hidden">
+        <div class="relative text-white px-8 py-12 bg-gradient-to-r from-rose-500 via-orange-400 to-amber-400 text-center">
+          <h1 class="text-4xl font-extrabold tracking-tight drop-shadow">🇹🇭 Thailand vs UK Retirement Calculator 🇬🇧</h1>
+          <p class="opacity-95 mt-2 text-lg">Enter your retirement budget and see how much you could save in Thailand</p>
+          <div class="absolute inset-x-0 -bottom-8 h-8 bg-white/0 backdrop-blur"></div>
+        </div>
+
+        <section class="bg-gradient-to-r from-teal-400 to-emerald-500 p-8">
+          <h2 class="section-title text-white drop-shadow">Your Personalized Retirement Savings Calculator</h2>
+          <div class="grid md:grid-cols-2 gap-8 mt-6">
+            <div class="glass-light rounded-2xl p-6">
+              <h3 class="text-xl font-semibold text-center">Your Current Situation</h3>
+              <div class="space-y-4 mt-5">
+                <div>
+                  <label class="font-semibold block mb-1">Current Monthly Retirement Budget (£)</label>
+                  <input id="currentBudget" type="number" value="3000" min="1000" max="10000" step="100" class="w-full px-4 py-3 rounded-xl text-gray-900 ring-2 ring-white/30 focus:ring-white/60 outline-none bg-white" />
+                  <div class="mt-3 flex flex-wrap gap-3" id="budgetQuick">
+                    <button class="chip" data-amount="1000">£1000</button>
+                    <button class="chip" data-amount="1500">£1500</button>
+                    <button class="chip" data-amount="2000">£2000</button>
+                    <button class="chip" data-amount="3000">£3000</button>
+                    <button class="chip" data-amount="5000">£5000</button>
+                  </div>
+                </div>
+                
+                <div>
+                  <label class="font-semibold block mb-1">Your Age</label>
+                  <select id="ageGroup" class="w-full px-4 py-3 rounded-xl text-gray-900 bg-white ring-2 ring-white/30 focus:ring-white/60 outline-none">
+                    <option value="50s">50-59</option>
+                    <option value="60s" selected>60-69</option>
+                    <option value="70+">70+</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="font-semibold block mb-1">Housing Preference in Thailand</label>
+                  <select id="housingLevel" class="w-full px-4 py-3 rounded-xl text-gray-900 bg-white ring-2 ring-white/30 focus:ring-white/60 outline-none">
+                    <option value="budget">Budget Living (£100-300/month)</option>
+                    <option value="comfortable" selected>Comfortable (£400-600/month)</option>
+                    <option value="premium">Premium (£700-1000/month)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="font-semibold block mb-1">City</label>
+                  <div class="grid grid-cols-3 gap-2 mt-2" id="cityChips">
+                    <button class="chip toggle-item active" data-city="cm">Chiang Mai</button>
+                    <button class="chip toggle-item" data-city="bkk">Bangkok</button>
+                    <button class="chip toggle-item" data-city="phuket">Phuket</button>
+                  </div>
+                  <div class="text-xs mt-1 opacity-90">City adjustment applied to housing<span id="cityAdjNote"></span>.</div>
+                </div>
+                <div>
+                  <label class="font-semibold block mb-1">Transportation Style</label>
+                  <select id="transportStyle" class="w-full px-4 py-3 rounded-xl text-gray-900 bg-white ring-2 ring-white/30 focus:ring-white/60 outline-none">
+                    <option value="grab">Taxis Only (£50-150/month)</option>
+                    <option value="scooter" selected>Basic Scooter (£10/month)</option>
+                    <option value="adventure">Car (£120/month)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="font-semibold block mb-1">Lifestyle Factors</label>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2" id="lifestyleToggles">
+                    <button class="toggle-item chip active" data-lifestyle="disciplined">🧘‍♂️ Disciplined<br><small>Local food, moderate spending</small></button>
+                    <button class="toggle-item chip" data-lifestyle="moderate">🍻 Social<br><small>Some bars, western food</small></button>
+                    <button class="toggle-item chip" data-lifestyle="heavy">🍺 Party Lifestyle<br><small>Regular bars, high spending</small></button>
+                    <button class="toggle-item chip" data-lifestyle="luxury">✨ Luxury<br><small>High-end everything</small></button>
+                  </div>
+                </div>
+                <div>
+                  <label class="font-semibold block mb-1">Return Flights to UK per Year</label>
+                  <div class="grid grid-cols-5 gap-2 mt-2" id="flightChips">
+                    <button class="chip toggle-item active" data-flights="0">0</button>
+                    <button class="chip toggle-item" data-flights="1">1</button>
+                    <button class="chip toggle-item" data-flights="2">2</button>
+                    <button class="chip toggle-item" data-flights="3">3</button>
+                    <button class="chip toggle-item" data-flights="4">4</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="glass-light rounded-2xl p-6">
+              <div class="flex items-center justify-center mb-2">
+                <div class="flex items-center gap-3" id="currencyToggles">
+                  <span class="text-sm text-slate-700">GBP</span>
+                  <label class="inline-flex items-center cursor-pointer select-none">
+                    <input type="checkbox" class="sr-only peer" id="currencySwitch" />
+                    <div class="w-14 h-8 bg-slate-300 rounded-full relative transition peer-checked:bg-emerald-500 peer-checked:[&>span]:translate-x-6 [&>span]:transition">
+                      <span class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition"></span>
+                    </div>
+                    <span class="ml-2 text-sm text-slate-700">THB</span>
+                  </label>
+                </div>
+              </div>
+              <h3 class="text-xl font-semibold text-center">Your Potential Savings</h3>
+              <div class="text-center mt-4">
+                <div id="monthlySavings" class="text-5xl font-extrabold text-emerald-700">£1,200</div>
+                <div class="opacity-90">per month</div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+                <div class="glass-chip rounded-xl p-4 text-center">
+                  <span id="yearlySavings" class="text-2xl font-bold block">£14,400</span>
+                  <div class="text-sm">Per Year</div>
+                </div>
+                <div class="glass-chip rounded-xl p-4 text-center">
+                  <span id="twentyYearSavings" class="text-2xl font-bold block">£288,000</span>
+                  <div class="text-sm">Over 20 Years</div>
+                </div>
+              </div>
+              <div class="mt-6 text-center">
+                <div class="glass-chip rounded-xl p-4">
+                  <strong>Your Thailand Budget: <span id="thailandBudget">£1,800</span>/month</strong><br />
+                  <small>vs UK Budget: <span id="ukBudget">£3,000</span>/month</small>
+                </div>
+              </div>
+
+              <div class="glass-chip rounded-xl p-4 mt-4 text-left">
+                <h4 class="font-semibold mb-2">Initial Outlay</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                  <div class="flex justify-between"><span>Vehicle Purchase</span><span id="initialVehicle">£400</span></div>
+                  <div class="flex justify-between"><span>Housing Deposit (≈2 months)</span><span id="initialDeposit">£1,000</span></div>
+                </div>
+                <div class="flex justify-between font-semibold mt-2 border-t pt-2">
+                  <span>Total Initial Outlay</span><span id="initialTotal">£1,400</span>
+                </div>
+                <div class="text-xs opacity-80 mt-1">One-time costs not included in monthly budget.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="p-8 space-y-10">
+          <section>
+            <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">Your Personalized Cost Breakdown</h3>
+            <div class="grid gap-4 md:grid-cols-2 mt-4">
+              <div class="bg-slate-50 rounded-xl p-4 shadow h-64 sm:h-72 md:h-80">
+                <canvas id="personalizedChart" class="w-full h-full"></canvas>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-4 shadow h-64 sm:h-72 md:h-80">
+                <canvas id="budgetPieChart" class="w-full h-full"></canvas>
+              </div>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 mt-4">
+              <div class="bg-slate-50 rounded-xl p-5 border-l-4 border-blue-500">
+                <h4 class="font-semibold text-slate-800 mb-3">🏠 Housing</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>UK Equivalent</span><span id="ukHousing">£1,200</span></div>
+                  <div class="flex justify-between py-2"><span>Thailand Cost</span><span id="thaiHousing">£500</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>Monthly Savings</span><span id="housingSavings">£700</span></div>
+                </div>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-5 border-l-4 border-blue-500">
+                <h4 class="font-semibold text-slate-800 mb-3">🍽️ Food & Living</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>UK Equivalent</span><span id="ukFood">£800</span></div>
+                  <div class="flex justify-between py-2"><span>Thailand Cost</span><span id="thaiFood">£300</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>Monthly Savings</span><span id="foodSavings">£500</span></div>
+                </div>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-5 border-l-4 border-blue-500">
+                <h4 class="font-semibold text-slate-800 mb-3">🏥 Health Insurance</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>Your Age Group</span><span id="ageDisplay">60s</span></div>
+                  <div class="flex justify-between py-2"><span>Monthly Premium</span><span id="healthCost">£145</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>Annual Cost</span><span id="healthAnnual">£1,740</span></div>
+                </div>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-5 border-l-4 border-blue-500">
+                <h4 class="font-semibold text-slate-800 mb-3">🚗 Transportation</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>Your Choice</span><span id="transportChoice">Basic Scooter</span></div>
+                  <div class="flex justify-between py-2"><span>Monthly Running Cost</span><span id="transportCost">£10</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>One-time Purchase Cost</span><span id="transportInitial">£400</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">⚠️ Age-Based Cost Projections</h3>
+            <div class="bg-slate-50 rounded-xl p-4 shadow mt-4 h-56 sm:h-72 md:h-96">
+              <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
+            </div>
+            <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6 mt-4">
+              <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
+              <p class="mt-2">Your health insurance costs will increase significantly as you age. At <span id="currentAge">60s</span>, you're paying around <span id="currentHealthCost">£145</span>/month. By your 70s, this could be <span id="futureHealthCost">£250+</span>/month. Factor this into your long-term budget!</p>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">🧭 Lifestyle Reality Check</h3>
+            <div class="bg-gradient-to-r from-rose-300 to-rose-400 text-white rounded-xl p-6 mt-4">
+              <h4 class="text-xl font-semibold">💸 Lifestyle Guidance</h4>
+              <p class="mt-2">You selected a <strong id="currentLifestyle">disciplined</strong> lifestyle.</p>
+              <div id="lifestyleMessage" class="mt-3 bg-white/20 p-3 rounded text-sm"></div>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">🧾 One-Time Purchase Costs</h3>
+            <div class="grid md:grid-cols-2 gap-4 mt-4">
+              <div class="bg-slate-50 rounded-xl p-5 shadow">
+                <h4 class="font-semibold text-slate-800 mb-3">🛵 Transportation Options</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>Taxis Only</span><span id="optionTaxi">£0 (no purchase needed)</span></div>
+                  <div class="flex justify-between py-2"><span>Basic Scooter</span><span id="optionScooterCost">£400</span></div>
+                  <div class="flex justify-between py-2"><span>Car</span><span id="optionCarCost">£8,000</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>Your Choice Impact</span><span id="transportPurchaseImpact">One-time £400 vs £8,000 for car</span></div>
+                </div>
+              </div>
+              <div class="bg-slate-50 rounded-xl p-5 shadow">
+                <h4 class="font-semibold text-slate-800 mb-3">🏦 Visa Requirements</h4>
+                <div class="divide-y">
+                  <div class="flex justify-between py-2"><span>Bank Deposit Required</span><span id="visaDeposit">£18,600</span></div>
+                  <div class="flex justify-between py-2"><span>Lock-up Period</span><span>2 months/year</span></div>
+                  <div class="flex justify-between py-2"><span>Opportunity Cost (3% annually)</span><span id="visaOppCost">£558/year lost returns</span></div>
+                  <div class="flex justify-between py-2 font-semibold"><span>Real Impact</span><span>Cash barrier + lost investment returns</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">💡 Your Action Plan</h3>
+            <div class="bg-emerald-50 rounded-xl p-5 shadow mt-4 border-l-4 border-emerald-400">
+              <h4 class="font-semibold text-emerald-800">📋 Based on Your Inputs</h4>
+              <div class="mt-2 space-y-1 text-slate-800">
+                <p><strong>Monthly Savings Potential:</strong> <span id="summaryMonthlySavings">£1,200</span></p>
+                <p><strong>20-Year Wealth Difference:</strong> <span id="summaryTwentyYear">£288,000</span></p>
+                <p><strong>Key Risks for Your Profile:</strong> <span id="keyRisks">Health insurance cost increases, lifestyle inflation</span></p>
+                <p><strong>Recommended Next Steps:</strong> <span id="nextSteps">Plan extended 2-3 month visit, research visa requirements, set up Thai bank account</span></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
