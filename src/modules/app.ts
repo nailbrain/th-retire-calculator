@@ -198,6 +198,9 @@ function update() {
     setText('transportChoice', transportCosts[transport].name)
     setText('transportCost', formatCurrency(transportCost))
     setText('transportInitial', formatCurrency(transportCosts[transport].initial))
+
+    setText('utilitiesLevel', housing.charAt(0).toUpperCase() + housing.slice(1))
+    setText('utilitiesCost', formatCurrency(utilitiesCost))
     // Initial outlay details
     const housingDeposit = housingCost * 2
     const vehicleInitial = transportCosts[transport].initial
