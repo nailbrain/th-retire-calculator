@@ -96,6 +96,9 @@ export function updateBudgetPieChart(totalCost: number, housing: number, lifesty
   if (charts.budgetPie) charts.budgetPie.destroy()
 
   const misc = Math.max(0, totalCost - housing - lifestyle - health - transport - utilities)
+  
+  // Debug: log the breakdown
+  console.log('Pie chart breakdown:', { totalCost, housing, lifestyle, health, transport, utilities, misc })
 
   charts.budgetPie = new Chart(ctx, {
     type: 'doughnut',

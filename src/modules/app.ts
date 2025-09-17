@@ -1,4 +1,4 @@
-import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesByHousingTHB, utilitiesCosts } from './data'
+import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesCosts } from './data'
 import type { AgeKey, HousingKey, TransportKey, CurrencyCode, CityKey } from './data'
 import { updateCharts, updateAgeProjectionChart, updateBudgetPieChart } from './charts'
 
@@ -143,10 +143,9 @@ function update() {
     const baseHousing = housingCosts[housing].thai
     const housingMultiplier = cityMultipliers[city].housing
     const housingCost = Math.round(baseHousing * housingMultiplier)
-    // Utilities scale by housing preference (provided in THB). Convert to GBP if needed for internal math.
-    const utilitiesTHB = utilitiesByHousingTHB[housing]
-    // Keep internal calculations in GBP; display conversion happens in formatCurrency.
-    const utilitiesCost = Math.round(utilitiesTHB / gbpToThbRate)
+    // Use GBP utilities costs directly for internal math
+    const utilitiesGBP = utilitiesCosts[housing].thai / gbpToThbRate
+    const utilitiesCost = Math.round(utilitiesGBP)
     const transportCost = transportCosts[transport].monthly
     const selectedLifestyle = lifestyleCosts[currentLifestyle]
     const thaiFoodMid = Math.round((selectedLifestyle.thai.food[0] + selectedLifestyle.thai.food[1]) / 2)
