@@ -1,4 +1,4 @@
-import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesByHousingTHB } from './data'
+import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesByHousingTHB, utilitiesCosts } from './data'
 import type { AgeKey, HousingKey, TransportKey, CurrencyCode, CityKey } from './data'
 import { updateCharts, updateAgeProjectionChart, updateBudgetPieChart } from './charts'
 
@@ -199,8 +199,9 @@ function update() {
     setText('transportCost', formatCurrency(transportCost))
     setText('transportInitial', formatCurrency(transportCosts[transport].initial))
 
-    setText('utilitiesLevel', housing.charAt(0).toUpperCase() + housing.slice(1))
-    setText('utilitiesCost', formatCurrency(utilitiesCost))
+    setText('ukUtilities', formatCurrency(utilitiesCosts[housing].uk))
+    setText('thaiUtilities', formatCurrency(utilitiesCost))
+    setText('utilitiesSavings', formatCurrency(utilitiesCosts[housing].uk - utilitiesCost))
     // Initial outlay details
     const housingDeposit = housingCost * 2
     const vehicleInitial = transportCosts[transport].initial

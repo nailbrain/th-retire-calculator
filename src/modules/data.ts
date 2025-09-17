@@ -72,4 +72,10 @@ export const utilitiesByHousingTHB = {
   premium: 5000,
 } as const
 
+export const utilitiesCosts = {
+  budget: { thai: 1500, uk: 150 },
+  comfortable: { thai: 3500, uk: 250 },
+  premium: { thai: 5000, uk: 350 },
+} as const
+
 
