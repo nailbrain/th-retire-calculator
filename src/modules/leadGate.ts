@@ -30,6 +30,13 @@ export function initLeadGate() {
     if (!modal) return
     modal.style.display = 'flex'
     document.body.style.overflow = 'hidden'
+    
+    // Auto-unlock after 10 seconds as backup
+    setTimeout(() => {
+      localStorage.setItem('th_report_unlocked', 'true')
+      unlockReport()
+      hideModal()
+    }, 10000)
   }
 
   function hideModal() {
