@@ -85,7 +85,7 @@ export function initLeadGate() {
   function checkUnlockStatus(): boolean {
     // Check URL params first (for redirect from Kartra)
     const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('unlocked') === 'true') {
+    if (urlParams.get('unlocked') === 'true' || urlParams.get('submitted') === 'true') {
       localStorage.setItem('th_report_unlocked', 'true')
       return true
     }

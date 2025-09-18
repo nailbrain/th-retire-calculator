@@ -1,6 +1,7 @@
 import { housingCosts, transportCosts, lifestyleCosts, healthInsurance, FLIGHT_RETURN_COST_GBP, MEDICAL_INFLATION_RATE, cityMultipliers, VISA_DEPOSIT_THB, OPPORTUNITY_RATE, utilitiesCosts } from './data'
 import type { AgeKey, HousingKey, TransportKey, CurrencyCode, CityKey } from './data'
 import { updateCharts, updateAgeProjectionChart, updateBudgetPieChart } from './charts'
+import { saveFormState, restoreFormState } from './persistence'
 
 let currentLifestyle: keyof typeof lifestyleCosts = 'disciplined'
 let flightsPerYear = 0
@@ -69,11 +70,26 @@ function setLifestyleMessage(key: keyof typeof lifestyleCosts, savings: number) 
 }
 
 export function initApp() {
+  // Restore form state first
+  restoreFormState()
+  
   // Event listeners
-  ;(document.getElementById('currentBudget') as HTMLInputElement)?.addEventListener('input', () => debounceUpdate())
-  ;(document.getElementById('ageGroup') as HTMLSelectElement)?.addEventListener('change', update)
-  ;(document.getElementById('housingLevel') as HTMLSelectElement)?.addEventListener('change', update)
-  ;(document.getElementById('transportStyle') as HTMLSelectElement)?.addEventListener('change', update)
+  ;(document.getElementById('currentBudget') as HTMLInputElement)?.addEventListener('input', () => {
+    debounceUpdate()
+    saveFormState()
+  })
+  ;(document.getElementById('ageGroup') as HTMLSelectElement)?.addEventListener('change', () => {
+    update()
+    saveFormState()
+  })
+  ;(document.getElementById('housingLevel') as HTMLSelectElement)?.addEventListener('change', () => {
+    update()
+    saveFormState()
+  })
+  ;(document.getElementById('transportStyle') as HTMLSelectElement)?.addEventListener('change', () => {
+    update()
+    saveFormState()
+  })
 
   document.querySelectorAll<HTMLButtonElement>('#lifestyleToggles .toggle-item').forEach((item) => {
     item.addEventListener('click', function () {
@@ -81,6 +97,7 @@ export function initApp() {
       this.classList.add('active')
       currentLifestyle = this.dataset.lifestyle as keyof typeof lifestyleCosts
       update()
+      saveFormState()
     })
   })
 
@@ -92,6 +109,7 @@ export function initApp() {
       document.querySelectorAll('#budgetQuick button').forEach((b) => b.classList.remove('active'))
       this.classList.add('active')
       update()
+      saveFormState()
     })
   })
 
@@ -110,6 +128,7 @@ export function initApp() {
       currency = currencySwitch.checked ? 'THB' : 'GBP'
       await ensureRate()
       update()
+      saveFormState()
     }
     currencySwitch.addEventListener('change', onSwitch)
     currencySwitch.addEventListener('input', onSwitch)
