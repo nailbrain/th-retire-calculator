@@ -21,6 +21,11 @@ export function initLeadGate() {
   modal?.addEventListener('click', (e) => {
     if (e.target === modal) hideModal()
   })
+  
+  // Manual unlock button
+  document.getElementById('manualUnlock')?.addEventListener('click', () => {
+    handleFormSuccess()
+  })
 
   // Check for unlock on page load (URL params or localStorage)
   window.addEventListener('load', () => {
