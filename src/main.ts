@@ -51,7 +51,10 @@ function initLeadGate() {
   })
 
   function unlockReport() {
+    const nomadSchoolCTA = document.getElementById('nomadSchoolCTA')
+    
     if (cta) cta.style.display = 'none'
+    if (nomadSchoolCTA) nomadSchoolCTA.classList.remove('hidden')
     if (reportSections) {
       reportSections.style.filter = 'none'
       reportSections.style.pointerEvents = 'auto'
