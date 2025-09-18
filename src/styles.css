@@ -43,19 +43,11 @@
     overflow-wrap: anywhere;
   }
   
-  /* Report gating styles */
-  .report-locked {
-    @apply relative;
-  }
-  .report-locked::after {
-    content: '';
-    @apply absolute inset-0 bg-white/20 backdrop-blur-sm pointer-events-none z-10;
-  }
-  .report-unlocked {
-    @apply relative;
-  }
-  .report-unlocked::after {
-    display: none;
+  /* Report gating styles - simple blur overlay */
+  #reportSections {
+    filter: blur(8px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
   }
   
   /* Modal overlay - full viewport coverage */
