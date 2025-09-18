@@ -8,7 +8,6 @@ function initLeadGate() {
   const reportSections = document.getElementById('reportSections')
   const showButton = document.getElementById('showUnlockModal')
   const closeButton = document.getElementById('closeModal')
-  const manualUnlockButton = document.getElementById('manualUnlock')
 
   // Check URL parameters for unlock (when returning from Kartra form)
   const urlParams = new URLSearchParams(window.location.search)
@@ -43,12 +42,6 @@ function initLeadGate() {
     modal?.classList.remove('flex')
   })
 
-  manualUnlockButton?.addEventListener('click', () => {
-    localStorage.setItem('th_report_unlocked', 'true')
-    unlockReport()
-    modal?.classList.add('hidden')
-    modal?.classList.remove('flex')
-  })
 
   modal?.addEventListener('click', (e) => {
     if (e.target === modal) {
