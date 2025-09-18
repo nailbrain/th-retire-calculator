@@ -221,7 +221,9 @@ function update() {
     setText('visaOppCost', oppDisplay)
 
     const ageDisplay = age === '70+' ? '70s' : age
+    const futureAge = age === '50s' ? '60s' : age === '60s' ? '70s' : '80s'
     setText('currentAge', ageDisplay)
+    setText('futureAge', futureAge)
     setText('currentHealthCost', formatCurrency(healthCost))
     setText('futureHealthCost', age === '70+' ? '£350+' : '£250+')
     setText('currentLifestyle', currentLifestyle)
