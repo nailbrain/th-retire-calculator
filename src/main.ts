@@ -20,13 +20,24 @@ function initLeadGate() {
     modal?.classList.remove('hidden')
     modal?.classList.add('flex')
     
-    // Auto-unlock after 15 seconds
+    // Listen for form submission
     setTimeout(() => {
-      localStorage.setItem('th_report_unlocked', 'true')
-      unlockReport()
-      modal?.classList.add('hidden')
-      modal?.classList.remove('flex')
-    }, 15000)
+      const kartraContainer = document.querySelector('.kartra_optin_container65ded5353c5ee48d0b7d48c591b8f430')
+      if (kartraContainer) {
+        // Watch for form submission
+        const forms = kartraContainer.querySelectorAll('form')
+        forms.forEach(form => {
+          form.addEventListener('submit', () => {
+            setTimeout(() => {
+              localStorage.setItem('th_report_unlocked', 'true')
+              unlockReport()
+              modal?.classList.add('hidden')
+              modal?.classList.remove('flex')
+            }, 1000)
+          })
+        })
+      }
+    }, 2000)
   })
 
   closeButton?.addEventListener('click', () => {
