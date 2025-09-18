@@ -1,13 +1,18 @@
 // Lead gating functionality
 export function initLeadGate() {
+  console.log('Lead gate initializing...')
+  
   const modal = document.getElementById('unlockModal')
   const cta = document.getElementById('unlockCTA')
   const reportSections = document.getElementById('reportSections')
   const showButton = document.getElementById('showUnlockModal')
   const closeButton = document.getElementById('closeModal')
 
+  console.log('Elements found:', { modal: !!modal, cta: !!cta, reportSections: !!reportSections })
+
   // Check if already unlocked
   const isUnlocked = checkUnlockStatus()
+  console.log('Is unlocked:', isUnlocked)
   
   if (isUnlocked) {
     unlockReport()
@@ -16,105 +21,82 @@ export function initLeadGate() {
   }
 
   // Event listeners
-  showButton?.addEventListener('click', () => showModal())
-  closeButton?.addEventListener('click', () => hideModal())
+  showButton?.addEventListener('click', () => {
+    console.log('Show modal clicked')
+    showModal()
+  })
+  
+  closeButton?.addEventListener('click', () => {
+    console.log('Close modal clicked')
+    hideModal()
+  })
+  
   modal?.addEventListener('click', (e) => {
-    if (e.target === modal) hideModal()
-  })
-  
-  // Auto-unlock after form interaction (backup method)
-  setTimeout(() => {
-    const kartraContainer = document.querySelector('.kartra_optin_container65ded5353c5ee48d0b7d48c591b8f430')
-    if (kartraContainer) {
-      // Listen for any form submission in the Kartra container
-      kartraContainer.addEventListener('submit', () => {
-        setTimeout(() => handleFormSuccess(), 1000)
-      })
-    }
-  }, 2000)
-
-  // Check for unlock on page load (URL params or localStorage)
-  window.addEventListener('load', () => {
-    if (checkUnlockStatus()) {
-      unlockReport()
+    if (e.target === modal) {
+      console.log('Modal backdrop clicked')
+      hideModal()
     }
   })
 
-  // Periodically check if form was submitted (since Kartra redirects to same page)
-  let checkInterval: number | undefined
-  
+  // Expose unlock for testing
+  ;(window as any).unlockReport = () => {
+    console.log('Manual unlock triggered')
+    localStorage.setItem('th_report_unlocked', 'true')
+    unlockReport()
+  }
+
   function showModal() {
+    console.log('Showing modal')
     if (!modal) return
     modal.classList.add('show')
     document.body.style.overflow = 'hidden'
-    
-    // Start checking for form submission every 2 seconds
-    checkInterval = window.setInterval(() => {
-      // Check if Kartra form container has success indicators
-      const kartraContainer = document.querySelector('.kartra_optin_container65ded5353c5ee48d0b7d48c591b8f430')
-      if (kartraContainer) {
-        // Look for success indicators in Kartra form
-        const successElement = kartraContainer.querySelector('[data-success="true"], .success, .thank-you, .submitted')
-        if (successElement) {
-          handleFormSuccess()
-        }
-      }
-    }, 2000)
   }
 
   function hideModal() {
+    console.log('Hiding modal')
     if (!modal) return
     modal.classList.remove('show')
     document.body.style.overflow = ''
-    
-    if (checkInterval) {
-      window.clearInterval(checkInterval)
-      checkInterval = undefined
-    }
-  }
-
-  function handleFormSuccess() {
-    localStorage.setItem('th_report_unlocked', 'true')
-    unlockReport()
-    hideModal()
-    
-    // Smooth scroll to the unlocked content
-    setTimeout(() => {
-      document.getElementById('reportSections')?.scrollIntoView({ behavior: 'smooth' })
-    }, 300)
-  }
-
-  // Expose unlock for console testing only
-  ;(window as any).unlockReport = () => {
-    localStorage.setItem('th_report_unlocked', 'true')
-    unlockReport()
   }
 
   function checkUnlockStatus(): boolean {
-    // Check URL params first (for redirect from Kartra)
+    // Check URL params first
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('unlocked') === 'true' || urlParams.get('submitted') === 'true') {
+      console.log('Unlocked via URL param')
       localStorage.setItem('th_report_unlocked', 'true')
       return true
     }
     
     // Check localStorage
-    return localStorage.getItem('th_report_unlocked') === 'true'
+    const stored = localStorage.getItem('th_report_unlocked') === 'true'
+    console.log('Stored unlock status:', stored)
+    return stored
   }
 
   function unlockReport() {
-    if (cta) cta.style.display = 'none'
+    console.log('Unlocking report')
+    if (cta) {
+      cta.style.display = 'none'
+      console.log('CTA hidden')
+    }
     if (reportSections) {
       reportSections.classList.remove('report-locked')
       reportSections.classList.add('report-unlocked')
+      console.log('Report sections unlocked')
     }
   }
 
   function lockReport() {
-    if (cta) cta.style.display = 'block'
+    console.log('Locking report')
+    if (cta) {
+      cta.style.display = 'block'
+      console.log('CTA shown')
+    }
     if (reportSections) {
       reportSections.classList.add('report-locked')
       reportSections.classList.remove('report-unlocked')
+      console.log('Report sections locked')
     }
   }
 }
