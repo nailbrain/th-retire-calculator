@@ -12,7 +12,7 @@ function initLeadGate() {
 
   // Check URL parameters for unlock (when returning from Kartra form)
   const urlParams = new URLSearchParams(window.location.search)
-  const hasUnlockParam = urlParams.has('submitted') || urlParams.has('success') || urlParams.has('thank-you') || urlParams.has('thankyou') || urlParams.has('optin') || urlParams.has('lead')
+  const hasUnlockParam = urlParams.has('referrer') || urlParams.has('submitted') || urlParams.has('success') || urlParams.has('thank-you') || urlParams.has('thankyou') || urlParams.has('optin') || urlParams.has('lead')
   
   // Also check if URL contains common success indicators
   const urlString = window.location.href.toLowerCase()
