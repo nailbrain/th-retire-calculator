@@ -73,6 +73,15 @@ export function initLeadGate() {
     }, 300)
   }
 
+  // Add manual unlock for testing
+  function manualUnlock() {
+    localStorage.setItem('th_report_unlocked', 'true')
+    unlockReport()
+  }
+
+  // Expose for testing
+  ;(window as any).unlockReport = manualUnlock
+
   function checkUnlockStatus(): boolean {
     // Check URL params first (for redirect from Kartra)
     const urlParams = new URLSearchParams(window.location.search)
