@@ -22,10 +22,16 @@ export function initLeadGate() {
     if (e.target === modal) hideModal()
   })
   
-  // Manual unlock button
-  document.getElementById('manualUnlock')?.addEventListener('click', () => {
-    handleFormSuccess()
-  })
+  // Auto-unlock after form interaction (backup method)
+  setTimeout(() => {
+    const kartraContainer = document.querySelector('.kartra_optin_container65ded5353c5ee48d0b7d48c591b8f430')
+    if (kartraContainer) {
+      // Listen for any form submission in the Kartra container
+      kartraContainer.addEventListener('submit', () => {
+        setTimeout(() => handleFormSuccess(), 1000)
+      })
+    }
+  }, 2000)
 
   // Check for unlock on page load (URL params or localStorage)
   window.addEventListener('load', () => {
