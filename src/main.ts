@@ -8,39 +8,44 @@ function initLeadGate() {
   const reportSections = document.getElementById('reportSections')
   const showButton = document.getElementById('showUnlockModal')
   const closeButton = document.getElementById('closeModal')
+  const manualUnlockButton = document.getElementById('manualUnlock')
 
-  // Check if already unlocked
-  const isUnlocked = localStorage.getItem('th_report_unlocked') === 'true'
+  // Check URL parameters for unlock (when returning from Kartra form)
+  const urlParams = new URLSearchParams(window.location.search)
+  const hasUnlockParam = urlParams.has('submitted') || urlParams.has('success') || urlParams.has('thank-you') || urlParams.has('thankyou') || urlParams.has('optin') || urlParams.has('lead')
   
+  // Also check if URL contains common success indicators
+  const urlString = window.location.href.toLowerCase()
+  const hasSuccessUrl = urlString.includes('success') || urlString.includes('thank') || urlString.includes('submitted') || urlString.includes('optin')
+  
+  // Check if already unlocked or has unlock parameter
+  const isUnlocked = localStorage.getItem('th_report_unlocked') === 'true' || hasUnlockParam || hasSuccessUrl
+  
+  // Debug logging
+  console.log('URL:', window.location.href)
+  console.log('URL Params:', Object.fromEntries(urlParams))
+  console.log('Has unlock param:', hasUnlockParam)
+  console.log('Has success URL:', hasSuccessUrl)
+  console.log('Is unlocked:', isUnlocked)
+
   if (isUnlocked) {
+    localStorage.setItem('th_report_unlocked', 'true')
     unlockReport()
   }
 
   showButton?.addEventListener('click', () => {
     modal?.classList.remove('hidden')
     modal?.classList.add('flex')
-    
-    // Listen for form submission
-    setTimeout(() => {
-      const kartraContainer = document.querySelector('.kartra_optin_container65ded5353c5ee48d0b7d48c591b8f430')
-      if (kartraContainer) {
-        // Watch for form submission
-        const forms = kartraContainer.querySelectorAll('form')
-        forms.forEach(form => {
-          form.addEventListener('submit', () => {
-            setTimeout(() => {
-              localStorage.setItem('th_report_unlocked', 'true')
-              unlockReport()
-              modal?.classList.add('hidden')
-              modal?.classList.remove('flex')
-            }, 1000)
-          })
-        })
-      }
-    }, 2000)
   })
 
   closeButton?.addEventListener('click', () => {
+    modal?.classList.add('hidden')
+    modal?.classList.remove('flex')
+  })
+
+  manualUnlockButton?.addEventListener('click', () => {
+    localStorage.setItem('th_report_unlocked', 'true')
+    unlockReport()
     modal?.classList.add('hidden')
     modal?.classList.remove('flex')
   })
