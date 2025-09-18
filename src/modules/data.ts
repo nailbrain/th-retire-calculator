@@ -15,7 +15,7 @@ export const housingCosts = {
 export const transportCosts = {
   grab: { monthly: 100, initial: 0, name: 'Taxis Only' },
   scooter: { monthly: 10, initial: 400, name: 'Basic Scooter' },
-  adventure: { monthly: 120, initial: 8000, name: 'Car' },
+  adventure: { monthly: 120, initial: 8000, name: 'Basic Car' },
 } as const
 
 // Lifestyle costs: ranges as [min, max]; we use midpoints for calculations
