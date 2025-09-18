@@ -63,7 +63,6 @@ function setLifestyleMessage(key: keyof typeof lifestyleCosts, savings: number) 
     disciplined: 'Great discipline. You are positioned to save significantly while maintaining a comfortable standard of living. Consider allocating a portion of savings to an emergency fund and long-term healthcare planning.',
     moderate: 'Balanced approach. Enjoyment with guardrails can work well. Set monthly caps for dining/entertainment to keep savings on track and review spending quarterly.',
     heavy: 'Warning: Frequent bar/party spending can quickly erode your budget. Cutting back even one or two nights per week could reclaim a large share of your savings.',
-    luxury: 'Premium lifestyle chosen. Expect higher recurring costs. If savings are a priority, target specific luxury areas to scale back (housing, dining, or transport).',
   }
   el.textContent = messages[key] + (savings < 500 ? ' Your current selections leave a small buffer; consider a more conservative mix.' : '')
 }

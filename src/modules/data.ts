@@ -32,10 +32,6 @@ export const lifestyleCosts = {
     uk: { food: [300, 350] as const, entertainment: [150, 250] as const },
     thai: { food: [222, 267] as const, entertainment: [711, 711] as const }, // heavy bar spending typical upper bound
   },
-  luxury: {
-    uk: { food: [400, 600] as const, entertainment: [200, 400] as const },
-    thai: { food: [333, 556] as const, entertainment: [178, 333] as const },
-  },
 } as const
 
 export const healthInsurance = {
