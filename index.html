@@ -228,9 +228,23 @@
             <div class="bg-slate-50 rounded-xl p-4 shadow mt-4 h-56 sm:h-72 md:h-96">
               <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
             </div>
-            <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6 mt-4">
-              <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
-              <p class="mt-2">Your health insurance costs will increase significantly as you age. In your <span id="currentAge">60s</span>, you're paying around <span id="currentHealthCost">£145</span>/month. By your <span id="futureAge">70s</span>, this could be <span id="futureHealthCost">£250+</span>/month. Factor this into your long-term budget!</p>
+            <div class="grid md:grid-cols-2 gap-6 mt-4">
+              <!-- Left Column - Our Analysis -->
+              <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6">
+                <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
+                <p class="mt-2">Your health insurance costs will increase significantly as you age. In your <span id="currentAge">60s</span>, you're paying around <span id="currentHealthCost">£145</span>/month. By your <span id="futureAge">70s</span>, this could be <span id="futureHealthCost">£250+</span>/month. Factor this into your long-term budget!</p>
+              </div>
+              
+              <!-- Right Column - SafetyWing Calculator -->
+              <div class="bg-gradient-to-r from-red-600 to-blue-600 text-white rounded-xl p-6">
+                <h4 class="text-xl font-semibold">💼 Get Real Expat Insurance Quotes</h4>
+                <p class="mt-2 mb-4 text-sm opacity-90">Compare our estimates with actual SafetyWing premiums for digital nomads:</p>
+                <div class="bg-white/10 rounded-lg p-4">
+                  <div class="safetywing-price-widget" data-safetywingaffiliateid="26404156" data-scale="1.0"></div>
+                  <script type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
+                </div>
+                <p class="mt-2 text-xs opacity-75">*Coverage available for ages 10-69 only</p>
+              </div>
             </div>
           </section>
 
