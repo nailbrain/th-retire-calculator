@@ -225,24 +225,24 @@
 
           <section>
             <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">⚠️ Age-Based Cost Projections</h3>
-            <div class="bg-slate-50 rounded-xl p-4 shadow mt-4 h-56 sm:h-72 md:h-96">
-              <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
-            </div>
             <div class="grid md:grid-cols-2 gap-6 mt-4">
-              <!-- Left Column - Our Analysis -->
-              <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6">
-                <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
-                <p class="mt-2">Your health insurance costs will increase significantly as you age. In your <span id="currentAge">60s</span>, you're paying around <span id="currentHealthCost">£145</span>/month. By your <span id="futureAge">70s</span>, this could be <span id="futureHealthCost">£250+</span>/month. Factor this into your long-term budget!</p>
+              <!-- Left Column - Chart -->
+              <div class="bg-slate-50 rounded-xl p-4 shadow h-56 sm:h-72 md:h-96">
+                <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
               </div>
               
               <!-- Right Column - SafetyWing Calculator -->
-              <div>
+              <div class="bg-slate-50 rounded-xl p-6 shadow">
                 <h4 class="text-xl font-semibold text-slate-800 mb-4">💼 Get Real Expat Insurance Quotes</h4>
-                <p class="mt-2 mb-4 text-sm text-slate-600">Compare our estimates with actual SafetyWing premiums for digital nomads:</p>
+                <p class="mt-2 mb-4 text-sm text-slate-600">Compare our chart projections with actual SafetyWing premiums:</p>
                 <div class="safetywing-price-widget" data-safetywingaffiliateid="26404156" data-scale="1.0"></div>
                 <script type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
                 <p class="mt-2 text-xs text-slate-500">*Coverage available for ages 10-69 only</p>
               </div>
+            </div>
+            <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6 mt-4">
+              <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
+              <p class="mt-2">Your health insurance costs will increase significantly as you age. In your <span id="currentAge">60s</span>, you're paying around <span id="currentHealthCost">£145</span>/month. By your <span id="futureAge">70s</span>, this could be <span id="futureHealthCost">£250+</span>/month. Factor this into your long-term budget!</p>
             </div>
           </section>
 
