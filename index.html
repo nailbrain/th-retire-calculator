@@ -225,17 +225,8 @@
 
           <section>
             <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">⚠️ Age-Based Cost Projections</h3>
-            <div class="grid md:grid-cols-2 gap-6 mt-4">
-              <!-- Left Column - Chart -->
-              <div class="bg-slate-50 rounded-xl p-4 shadow h-56 sm:h-72 md:h-96">
-                <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
-              </div>
-              
-              <!-- Right Column - SafetyWing Calculator -->
-              <div>
-                <div class="safetywing-price-widget" data-safetywingaffiliateid="26404156" data-scale="1.0"></div>
-                <script type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
-              </div>
+            <div class="bg-slate-50 rounded-xl p-4 shadow mt-4 h-56 sm:h-72 md:h-96">
+              <canvas id="ageProjectionChart" class="w-full h-full"></canvas>
             </div>
             <div class="bg-gradient-to-r from-amber-400 to-rose-500 text-white rounded-xl p-6 mt-4">
               <h4 class="text-xl font-semibold">📈 Critical Planning Point</h4>
@@ -278,13 +269,22 @@
 
           <section>
             <h3 class="text-2xl font-semibold text-slate-800 border-b-4 border-blue-500 pb-2">💡 Your Action Plan</h3>
-            <div class="bg-emerald-50 rounded-xl p-5 shadow mt-4 border-l-4 border-emerald-400">
-              <h4 class="font-semibold text-emerald-800">📋 Based on Your Inputs</h4>
-              <div class="mt-2 space-y-1 text-slate-800">
-                <p><strong>Monthly Savings Potential:</strong> <span id="summaryMonthlySavings">£1,200</span></p>
-                <p><strong>20-Year Wealth Difference:</strong> <span id="summaryTwentyYear">£288,000</span></p>
-                <p><strong>Key Risks for Your Profile:</strong> <span id="keyRisks">Health insurance cost increases, lifestyle inflation</span></p>
-                <p><strong>Recommended Next Steps:</strong> <span id="nextSteps">Plan extended 2-3 month visit, research visa requirements, set up Thai bank account</span></p>
+            <div class="grid md:grid-cols-2 gap-6 mt-4">
+              <!-- Left Column - Action Plan -->
+              <div class="bg-emerald-50 rounded-xl p-5 shadow border-l-4 border-emerald-400">
+                <h4 class="font-semibold text-emerald-800">📋 Based on Your Inputs</h4>
+                <div class="mt-2 space-y-1 text-slate-800">
+                  <p><strong>Monthly Savings Potential:</strong> <span id="summaryMonthlySavings">£1,200</span></p>
+                  <p><strong>20-Year Wealth Difference:</strong> <span id="summaryTwentyYear">£288,000</span></p>
+                  <p><strong>Key Risks for Your Profile:</strong> <span id="keyRisks">Health insurance cost increases, lifestyle inflation</span></p>
+                  <p><strong>Recommended Next Steps:</strong> <span id="nextSteps">Plan extended 2-3 month visit, research visa requirements, set up Thai bank account</span></p>
+                </div>
+              </div>
+              
+              <!-- Right Column - SafetyWing Calculator -->
+              <div>
+                <div class="safetywing-price-widget" data-safetywingaffiliateid="26404156" data-scale="1.0"></div>
+                <script type="text/javascript" src="https://storage.googleapis.com/safetywing-static/widget/safetywing-price-widget.js"></script>
               </div>
             </div>
           </section>
