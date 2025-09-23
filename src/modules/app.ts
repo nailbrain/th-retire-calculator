@@ -153,7 +153,9 @@ function update() {
     const healthCost = healthInsurance[age].good
     const miscCost = 100
 
-    const monthlyFlightAllocation = Math.round((FLIGHT_RETURN_COST_GBP * flightsPerYear) / 12)
+    // Add £100 per return flight if city is not Bangkok to cover domestic connection
+    const perReturnFlightGbp = FLIGHT_RETURN_COST_GBP + (city !== 'bkk' ? 100 : 0)
+    const monthlyFlightAllocation = Math.round((perReturnFlightGbp * flightsPerYear) / 12)
     const totalThailandCost = housingCost + transportCost + lifestyleCost + healthCost + utilitiesCost + miscCost + monthlyFlightAllocation
     const monthlySavings = Math.max(0, currentBudget - totalThailandCost)
     const yearlySavings = monthlySavings * 12
@@ -167,7 +169,7 @@ function update() {
       miscCost,
       age,
       medicalInflationRate: MEDICAL_INFLATION_RATE,
-      flightsPerYear,
+      monthlyFlightAllocation,
     })
 
     setText('monthlySavings', formatCurrency(monthlySavings))
@@ -259,11 +261,9 @@ function computeAgeAdjustedTwentyYearSavings(params: {
   miscCost: number
   age: AgeKey
   medicalInflationRate: number
-  flightsPerYear: number
+  monthlyFlightAllocation: number
 }): number {
-  const { currentBudget, housingCost, transportCost, lifestyleCost, utilitiesCost, miscCost, age, medicalInflationRate, flightsPerYear } = params
-
-  const monthlyFlightAllocation = Math.round((FLIGHT_RETURN_COST_GBP * flightsPerYear) / 12)
+  const { currentBudget, housingCost, transportCost, lifestyleCost, utilitiesCost, miscCost, age, medicalInflationRate, monthlyFlightAllocation } = params
 
   // Determine years in each band over a 20-year horizon
   const bands: { key: AgeKey; years: number }[] =
